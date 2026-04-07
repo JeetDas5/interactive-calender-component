@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background-cream: #FAFAF5;
+  --color-paper-dark: #16213E;
+  --color-primary-dark: #E8E8E8;
+  --color-muted-dark: #8888A0;
+  
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
+}
+
+@layer base {
+  body {
+    background: radial-gradient(ellipse at 20% 50%, #e8eaf6 0%, #f0f4f8 40%, #e8f5e9 100%);
+    min-height: 100vh;
+  }
+
+  .dark body {
+    background: radial-gradient(ellipse at 20% 50%, #0d1b2a 0%, #1a1a2e 50%, #16213e 100%);
+  }
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0,0,0,0.15);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Textarea no scrollbar */
+textarea::-webkit-scrollbar {
+  display: none;
+}
+textarea {
+  scrollbar-width: none;
+}
+
+/* Fade-in utility */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
+}

@@ -18,9 +18,9 @@ export const metadata: Metadata = {
   title: "Interactive Calendar — Plan Your Year",
   description: "A beautifully crafted interactive wall calendar with range selection, notes, and month themes.",
   icons: {
-    icon: "/logo.png",
-    shortcut: "/logo.png",
-    apple: "/logo.png",
+    icon: "/logo.jpg",
+    shortcut: "/logo.jpg",
+    apple: "/logo.jpg",
   },
 };
 

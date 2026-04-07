@@ -100,7 +100,7 @@ export function NotesPanel({ state, theme, setActiveTab }: Props) {
       />
 
       {/* ── Textarea / note area ── */}
-      <div className="flex-grow flex flex-col px-4 pb-5 min-h-0">
+      <div className="grow flex flex-col px-4 pb-5 min-h-0">
         {/* Label row */}
         <div className="text-[9px] uppercase tracking-[0.15em] font-bold mb-2 flex items-center justify-between">
           <span style={{ color: isDark ? '#666688' : '#BBBBBB' }}>
@@ -123,7 +123,7 @@ export function NotesPanel({ state, theme, setActiveTab }: Props) {
         {isRangeModeActive && !rangeKey ? (
           /* No range selected placeholder */
           <div
-            className="flex-grow flex flex-col items-center justify-center text-center gap-2 rounded-xl border border-dashed py-6"
+            className="grow flex flex-col items-center justify-center text-center gap-2 rounded-xl border border-dashed py-6"
             style={{
               borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.08)',
               color: isDark ? '#666688' : '#BBBBBB',
@@ -139,7 +139,7 @@ export function NotesPanel({ state, theme, setActiveTab }: Props) {
             </p>
           </div>
         ) : (
-          <div className="relative flex-grow flex flex-col">
+          <div className="relative grow flex flex-col">
             <textarea
               value={note}
               onChange={(e) => setNote(e.target.value)}
@@ -149,7 +149,7 @@ export function NotesPanel({ state, theme, setActiveTab }: Props) {
                   ? 'Notes for this date range...'
                   : 'Your thoughts for this month...'
               }
-              className="w-full flex-grow min-h-[90px] text-[12.5px] font-sans resize-none focus:outline-none bg-transparent transition-colors"
+              className="w-full grow min-h-[90px] text-[12.5px] font-sans resize-none focus:outline-none bg-transparent transition-colors"
               style={{
                 lineHeight: '22px',
                 color: textColor,

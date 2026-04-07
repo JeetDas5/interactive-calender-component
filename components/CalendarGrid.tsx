@@ -109,7 +109,7 @@ export function CalendarGrid({
   void daysInMonth; // suppress unused warning
 
   return (
-    <div className="w-full flex-grow flex flex-col">
+    <div className="w-full grow flex flex-col">
       {/* Week start toggle */}
       <div className="flex justify-end items-center px-4 sm:px-5 mb-1 mt-1">
         <button
@@ -136,7 +136,7 @@ export function CalendarGrid({
             return (
               <div
                 key={day}
-                className="text-[9px] sm:text-[10px] font-bold tracking-[0.1em] text-center py-1"
+                className="text-[9px] sm:text-[10px] font-bold tracking-widest text-center py-1"
                 style={{
                   color: isWeekend ? theme.accent : undefined,
                 }}

@@ -13,8 +13,18 @@ import { useMonthTheme } from "@/hooks/useMonthTheme";
 import { HeroPanel } from "./HeroPanel";
 
 const MONTH_NAMES = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 export function CalendarApp() {
@@ -23,8 +33,13 @@ export function CalendarApp() {
   const [mounted, setMounted] = useState(false);
   const [isFlipping, setIsFlipping] = useState(false);
 
-  // Hydration guard
-  useEffect(() => { setMounted(true); }, []);
+  // Hydration guard to avoid mismatch between server/client HTML
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
 
   const triggerFlip = (action: "NEXT_MONTH" | "PREV_MONTH") => {
     if (isFlipping) return;
@@ -63,7 +78,6 @@ export function CalendarApp() {
   return (
     <div className="min-h-screen py-6 sm:py-10 px-3 sm:px-6 flex items-center justify-center font-sans">
       <div className="relative w-full max-w-full md:max-w-[720px] lg:max-w-[860px] xl:max-w-[920px] mx-auto pt-7">
-
         {/* Spiral binding */}
         <SpiralBinding monthIndex={state.currentMonth} theme={theme} />
 
@@ -71,12 +85,15 @@ export function CalendarApp() {
           {/* Dark mode toggle */}
           <DarkModeToggle
             isDark={state.isDark}
-            onToggle={() => dispatch({ type: "SET_DARK_MODE", payload: !state.isDark })}
+            onToggle={() =>
+              dispatch({ type: "SET_DARK_MODE", payload: !state.isDark })
+            }
           />
 
           {/* Flip animation wrapper */}
-          <div className={`w-full flex flex-col items-center relative ${animateClass}`}>
-
+          <div
+            className={`w-full flex flex-col items-center relative ${animateClass}`}
+          >
             {/* ── Hero image ── */}
             <div className="w-full">
               <HeroPanel
@@ -107,17 +124,17 @@ export function CalendarApp() {
 
               {/* RIGHT COLUMN — Nav + Grid */}
               <div className="w-full md:w-[70%] flex flex-col pt-3 pb-3">
-
                 {/* Month navigation header */}
                 <div className="flex justify-between items-center px-4 sm:px-5 mt-1 mb-1">
-
                   {/* Prev button */}
                   <button
                     onClick={() => triggerFlip("PREV_MONTH")}
                     disabled={isFlipping}
                     className={[
                       "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 focus:outline-none",
-                      isFlipping ? "opacity-40 cursor-not-allowed" : "hover:scale-110 active:scale-95",
+                      isFlipping
+                        ? "opacity-40 cursor-not-allowed"
+                        : "hover:scale-110 active:scale-95",
                     ].join(" ")}
                     style={{
                       color: theme.accent,
@@ -126,8 +143,18 @@ export function CalendarApp() {
                     }}
                     aria-label="Previous month"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M15 19l-7-7 7-7"
+                      />
                     </svg>
                   </button>
 
@@ -158,8 +185,16 @@ export function CalendarApp() {
                           }}
                           title="Jump to today"
                         >
-                          <svg className="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5}
+                          <svg
+                            className="w-2.5 h-2.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2.5}
                               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                             />
                           </svg>
@@ -175,7 +210,9 @@ export function CalendarApp() {
                     disabled={isFlipping}
                     className={[
                       "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 focus:outline-none",
-                      isFlipping ? "opacity-40 cursor-not-allowed" : "hover:scale-110 active:scale-95",
+                      isFlipping
+                        ? "opacity-40 cursor-not-allowed"
+                        : "hover:scale-110 active:scale-95",
                     ].join(" ")}
                     style={{
                       color: theme.accent,
@@ -184,8 +221,18 @@ export function CalendarApp() {
                     }}
                     aria-label="Next month"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2.5}
+                        d="M9 5l7 7-7 7"
+                      />
                     </svg>
                   </button>
                 </div>
@@ -198,9 +245,15 @@ export function CalendarApp() {
                   selectedRange={state.selectedRange}
                   hoveredDate={state.hoveredDate}
                   theme={theme}
-                  onClickDate={(iso) => dispatch({ type: "CLICK_DATE", payload: iso })}
-                  onHoverDate={(iso) => dispatch({ type: "SET_HOVERED_DATE", payload: iso })}
-                  onToggleWeekStart={() => dispatch({ type: "TOGGLE_WEEK_START" })}
+                  onClickDate={(iso) =>
+                    dispatch({ type: "CLICK_DATE", payload: iso })
+                  }
+                  onHoverDate={(iso) =>
+                    dispatch({ type: "SET_HOVERED_DATE", payload: iso })
+                  }
+                  onToggleWeekStart={() =>
+                    dispatch({ type: "TOGGLE_WEEK_START" })
+                  }
                 />
 
                 {/* Range summary bar */}

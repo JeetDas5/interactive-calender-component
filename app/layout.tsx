@@ -15,7 +15,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Interactive Calendar — Plan Your Year",
+  title: "Interactive Wall Calendar — Plan Your Year",
   description: "A beautifully crafted interactive wall calendar with range selection, notes, and month themes.",
   icons: {
     icon: "/logo.jpg",
